@@ -1483,6 +1483,5 @@ var ChromeService = (function() {
         chrome.tabs.reload(sender.tab.id);
     };
 
-    chrome.runtime.setUninstallURL("http://brookhong.github.io/2018/01/30/why-did-you-uninstall-surfingkeys.html");
     return self;
 })();
