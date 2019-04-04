@@ -208,7 +208,7 @@ body {
   top: 10%;
   left: 10%;
   text-align: left;
-  box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.8);
+  box-shadow: rgba(69, 65, 78, 0.1) 2px 6px 15px 0px;
   z-index: 2147483298;
   padding: 1rem;
 }
@@ -253,18 +253,21 @@ kbd {
 #sk_banner {
   padding: 0.5rem;
   position: fixed;
-  left: 10%;
+  left: 40%;
   top: -3rem;
   z-index: 2147483000;
-  width: 80%;
-  border-radius: 0px 0px 4px 4px;
-  border: 1px solid #ffc356;
+  width: 20%;
+  border-radius: 4px 4px;
   border-top-style: none;
   text-align: center;
-  background: rgb(255, 233, 182);
+  background: #fff;
   white-space: nowrap;
   text-overflow: ellipsis;
   overflow: hidden;
+  padding: 1rem;
+  box-shadow: rgba(69, 65, 78, 0.1) 2px 6px 15px 0px;
+  font-family: Fira Code, serif, sans-serif;
+  font-size: 0.9rem;
 }
 #sk_tabs {
   position: fixed;
