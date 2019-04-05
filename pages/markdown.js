@@ -1,6 +1,8 @@
 var markdownBody = document.querySelector('.markdown-body');
+var markdown_editor = createMarkdownEditor('markdown-editor');
 function previewMarkdown(mk) {
   Front.source = mk;
+
   if (runtime.conf.useLocalMarkdownAPI) {
     setInnerHTML(markdownBody, marked(mk));
   } else {
@@ -15,6 +17,40 @@ function previewMarkdown(mk) {
       }
     );
   }
+  if (!markdown_editor.getValue()) {
+    markdown_editor.setValue(mk);
+  }
+}
+
+var markdown_update_timer = null;
+markdown_editor.on('change', function(e) {
+  if (!!markdown_update_timer) {
+    clearTimeout(markdown_update_timer);
+  }
+
+  markdown_update_timer = setTimeout(function() {
+    var content = markdown_editor.getValue();
+    if (content !== Front.source) {
+      previewMarkdown(content);
+    }
+  }, 1000);
+});
+function createMarkdownEditor(elmId) {
+  var _ace = ace.edit(elmId);
+  _ace.$blockScrolling = Infinity;
+  _ace.setTheme('ace/theme/chrome');
+
+  _ace.setKeyboardHandler('ace/keyboard/vim');
+
+  _ace.setOptions({
+    wrap: true,
+    showPrintMargin: false,
+    mode: 'ace/mode/markdown',
+    theme: 'ace/theme/chrome',
+    autoScrollEditorIntoView: true,
+  });
+
+  return _ace;
 }
 
 mapkey('sm', '#99Edit markdown source', function() {
@@ -49,6 +85,7 @@ var reader = new FileReader(),
   inputFile;
 reader.onload = function() {
   previewMarkdown(reader.result);
+  markdown_editor.setValue(reader.result);
 };
 function previewMarkdownFile() {
   reader.readAsText(inputFile);
